@@ -1,12 +1,12 @@
 databases:
   - name: airplane_shop
-    plan: free
+    plan: starter
     databaseName: airplane_shop
     user: enesbarut
 
 services:
   - type: web
-    plan: free
+    plan: starter
     name: airplane_shop
     runtime: python
     buildCommand: "./build.sh"
