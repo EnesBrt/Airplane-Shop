@@ -10,15 +10,15 @@ class Customer(models.Model):
     phone = PhoneNumberField(unique=True)
 
 
-class Orders(models.Model):
+class Order(models.Model):
     id_order = models.BigAutoField(primary_key=True)
-    id_client = models.ForeignKey(to=Customer, on_delete=models.CASCADE)
+    id_client = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date_order = models.DateTimeField(auto_now=True)
     status_order = models.CharField()
     id_transaction = models.CharField()
 
 
-class Products(models.Model):
+class Product(models.Model):
     id_product = models.BigAutoField("Product Id", primary_key=True)
     name = models.CharField("Product name", null=False)
     description = models.TextField("Product description", null=False)
@@ -27,8 +27,8 @@ class Products(models.Model):
     stock = models.IntegerField("Product remaining stock", null=False)
 
 
-class OrderDetails(models.Model):
-    id_order = models.ForeignKey(Orders, on_delete=models.CASCADE)
-    id_product = models.ForeignKey(Products, on_delete=models.CASCADE)
+class OrderDetail(models.Model):
+    id_order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField("Quantity of ordered product", null=False)
     price = models.FloatField("Total price of the order", null=False)
