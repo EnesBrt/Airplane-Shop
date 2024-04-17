@@ -230,7 +230,7 @@ class AccountAuthView(RegisterUserMixin, generic.TemplateView):
 
     # pylint: disable=unused-argument
     def get_registration_success_message(self, form):
-        return _("Bienvenue dans notre boutique en ligne !")
+        return _("Thanks for registering!")
 
     def get_registration_success_url(self, form):
         redirect_url = form.cleaned_data["redirect_url"]
