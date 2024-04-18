@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "phonenumber_field",
-    "airplane_apps",
     "django.contrib.sites",
     "django.contrib.flatpages",
     "oscar.config.Shop",
