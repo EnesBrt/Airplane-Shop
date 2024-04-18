@@ -103,13 +103,15 @@ class ConfirmPasswordForm(forms.Form):
 
 class EmailUserCreationForm(forms.ModelForm):
     email = forms.EmailField(label=_("Email address"))
+    first_name = forms.CharField(label=_("First name"))
+    last_name = forms.CharField(label=_("Last name"))
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput)
     redirect_url = forms.CharField(widget=forms.HiddenInput, required=False)
 
     class Meta:
         model = User
-        fields = ("email",)
+        fields = ("email", "first_name", "last_name")
 
     def __init__(self, *args, host=None, **kwargs):
         self.host = host
@@ -137,6 +139,18 @@ class EmailUserCreationForm(forms.ModelForm):
                 _("A user with that email address already exists")
             )
         return email
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get("first_name")
+        if not first_name:
+            raise forms.ValidationError(_("First name is required"))
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get("last_name")
+        if not last_name:
+            raise forms.ValidationError(_("Last name is required"))
+        return last_name
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1", "")
