@@ -1,4 +1,3 @@
-# pylint: disable=attribute-defined-outside-init
 from django import http
 from django.conf import settings
 from django.contrib import messages
