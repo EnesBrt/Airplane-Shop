@@ -1,0 +1,8 @@
+{% block content %}
+    <h1>Verify your email address</h1>
+    <p>Hi {{ user.first_name }},</p>
+    <p>Thanks for signing up for an account with {{ site_name }}. Just one more step - please verify your email address by clicking the link below:</p>
+    <p><a href="{{ verification_url }}">Verify your email address</a></p>
+    <p>If you didn't sign up for an account with {{ site_name }}, please ignore this email.</p>
+    <p>Thanks,<br>{{ site_name }}</p>
+{% endblock %}
