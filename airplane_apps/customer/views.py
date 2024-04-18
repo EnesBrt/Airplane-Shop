@@ -137,7 +137,7 @@ class VerifyEmailView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             pass
 
-    return redirect("customer:login")
+        return redirect("customer:login")
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
