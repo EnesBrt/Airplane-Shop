@@ -93,51 +93,8 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         return ctx
 
     def form_valid(self, form):
-        user = self.register_user(form)
-
-        token = default_token_generator.make_token(user)
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-
-        current_site = get_current_site(self.request)
-        verification_link = reverse(
-            "customer:verify-email", kwargs={"uidb64": uid, "token": token}
-        )
-
-        email_content = render_to_string(
-            "airplane_shop/templates/oscar/email_verification.html",
-            {
-                "user": user,
-                "verification_link": verification_link,
-            },
-        )
-
-        send_mail(
-            "Email Verification",
-            email_content,
-            settings.EMAIL_HOST_USER,
-            [user.email],
-            fail_silently=False,
-        )
-
+        self.register_user(form)
         return redirect(form.cleaned_data["redirect_url"])
-
-
-class VerifyEmailView(View):
-    def get(self, request, uidb64, token):
-        try:
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = User.objects.get(pk=uid)
-
-            if default_token_generator.check_token(user, token):
-                user.is_active = True
-                user.save()
-                messages.success(request, "Email verified successfully")
-                return redirect("customer:login")
-
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            pass
-
-        return redirect("customer:login")
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
