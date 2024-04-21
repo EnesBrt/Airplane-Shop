@@ -129,7 +129,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         #     self.request,
         #     "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
         # )
-
+        print(settings.OSCAR_ACCOUNTS_REDIRECT_URL)
         return redirect(settings.OSCAR_ACCOUNTS_REDIRECT_URL)
 
 
