@@ -130,7 +130,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         #     "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
         # )
 
-        return redirect(form.cleaned_data["redirect_url"])
+        return redirect(settings.OSCAR_ACCOUNTS_REDIRECT_URL)
 
 
 # class ActivateAccountView(generic.View):
