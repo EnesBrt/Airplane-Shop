@@ -1,6 +1,7 @@
 from django import http
 from django.conf import settings
 from django.contrib import messages
+from django.views.generic import View
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
@@ -12,6 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_text
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
@@ -137,17 +139,14 @@ class ActivateAccountView(generic.View):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
             user = User.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
-
-        if user is not None and account_activation_token.check_token(user, token):
-            user.is_active = True
-            user.save()
-            return HttpResponse("Votre compte a été activé avec succès.")
-        else:
-            return HttpResponse("Le lien d'activation est invalide!")
-
-        return redirect("customer:login")
+        if account_activation_token.check_token(user, token):
+                user.is_active = True
+                user.save()
+                return redirect('customer:login')
+            else:
+                return render(request, 'activation_invalid.html')
+        except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
+            return render(request, 'activation_invalid.html')
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
