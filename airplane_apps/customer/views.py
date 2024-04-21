@@ -139,14 +139,14 @@ class ActivateAccountView(generic.View):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
             user = User.objects.get(pk=uid)
-        if account_activation_token.check_token(user, token):
+            if account_activation_token.check_token(user, token):
                 user.is_active = True
                 user.save()
-                return redirect('customer:login')
+                return redirect("customer:login")
             else:
-                return render(request, 'activation_invalid.html')
+                return render(request, "activation_invalid.html")
         except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
-            return render(request, 'activation_invalid.html')
+            return render(request, "activation_invalid.html")
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
