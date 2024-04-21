@@ -17,7 +17,6 @@ from django.utils.encoding import force_str
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str, force_bytes
 from django.core.mail import send_mail
-from .tokens import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
 
 from oscar.apps.customer.utils import get_password_reset_url
@@ -102,7 +101,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
 
         # generate token
         uid = urlsafe_base64_encode(force_bytes(user.pk))
-        token = account_activation_token.make_token(user)
+        token = default_token_generator.make_token(user)
 
         # get current site and activation url
         activation_url = reverse(
@@ -140,7 +139,7 @@ class ActivateAccountView(generic.View):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)
-            if account_activation_token.check_token(user, token):
+            if default_token_generator.check_token(user, token):
                 user.is_active = True
                 user.save()
                 return redirect("customer:login")
