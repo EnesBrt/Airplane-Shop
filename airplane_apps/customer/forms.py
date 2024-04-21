@@ -155,7 +155,7 @@ class EmailUserCreationForm(forms.ModelForm):
         return password2
 
     def clean_redirect_url(self):
-        return redirect("customer:login")
+        return reverse("customer:login")
 
     def save(self, commit=True):
         user = super().save(commit=False)
