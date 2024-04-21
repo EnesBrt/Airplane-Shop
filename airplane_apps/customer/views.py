@@ -291,8 +291,7 @@ class AccountAuthView(RegisterUserMixin, generic.TemplateView):
         redirect_url = form.cleaned_data["redirect_url"]
         if redirect_url:
             return redirect_url
-
-        return reverse("customer:login")
+        return reverse("login")
 
 
 class LogoutView(generic.RedirectView):
