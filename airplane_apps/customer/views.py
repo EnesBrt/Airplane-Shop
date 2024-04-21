@@ -129,7 +129,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         )
         return redirect("customer:login")
 
-        return redirect(form.cleaned_data["redirect_url"])
+        # return redirect(form.cleaned_data["redirect_url"])
 
 
 class ActivateAccountView(generic.View):
