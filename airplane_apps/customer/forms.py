@@ -154,7 +154,7 @@ class EmailUserCreationForm(forms.ModelForm):
         return password2
 
     def clean_redirect_url(self):
-        return settings.OSCAR_ACCOUNTS_REDIRECT_URL
+        return redirect("customer:login")
 
     def save(self, commit=True):
         user = super().save(commit=False)
