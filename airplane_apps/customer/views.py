@@ -75,7 +75,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect(settings.LOGIN_REDIRECT_URL)
+            return redirect(settings.OSCAR_ACCOUNTS_REDIRECT_URL)
         return super().get(request, *args, **kwargs)
 
     def get_logged_in_redirect(self):
