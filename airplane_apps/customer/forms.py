@@ -157,7 +157,7 @@ class EmailUserCreationForm(forms.ModelForm):
         url = self.cleaned_data["redirect_url"].strip()
         if url and url_has_allowed_host_and_scheme(url, self.host):
             return url
-        return settings.OSCAR_ACCOUNT_REDIRECT_URL
+        return settings.OSCAR_ACCOUNTS_REDIRECT_URL
 
     def save(self, commit=True):
         user = super().save(commit=False)
