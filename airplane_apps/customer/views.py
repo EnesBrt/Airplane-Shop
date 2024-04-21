@@ -76,7 +76,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect(settings.OSCAR_ACCOUNTS_REDIRECT_URL)
+            return reverse("customer:login")
         return super().get(request, *args, **kwargs)
 
     def get_logged_in_redirect(self):
@@ -131,7 +131,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         #     "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
         # )
 
-        return redirect("customer:login")
+        return reverse("customer:login")
 
 
 # class ActivateAccountView(generic.View):
@@ -290,7 +290,7 @@ class AccountAuthView(RegisterUserMixin, generic.TemplateView):
         return _("Thanks for registering!")
 
     def get_registration_success_url(self, form):
-        return redirect("customer:login")
+        return reverse("customer:login")
 
 
 class LogoutView(generic.RedirectView):
