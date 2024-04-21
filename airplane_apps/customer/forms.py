@@ -1,7 +1,6 @@
 import datetime
 import string
 
-from django.urls import reverse
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
@@ -158,7 +157,7 @@ class EmailUserCreationForm(forms.ModelForm):
         url = self.cleaned_data["redirect_url"].strip()
         if url and url_has_allowed_host_and_scheme(url, self.host):
             return url
-        return reverse("customer:login")
+        return settings.LOGIN_REDIRECT_URL
 
     def save(self, commit=True):
         user = super().save(commit=False)
