@@ -95,57 +95,56 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         return ctx
 
     def form_valid(self, form):
-        user = self.register_user(form)
-        user.is_active = False
+        self.register_user(form)
         user.save()
 
         # generate token
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-        token = default_token_generator.make_token(user)
+        # uid = urlsafe_base64_encode(force_bytes(user.pk))
+        # token = default_token_generator.make_token(user)
 
-        # get current site and activation url
-        activation_url = reverse(
-            "activate_account", kwargs={"uidb64": uid, "token": token}
-        )
+        # # get current site and activation url
+        # activation_url = reverse(
+        #     "activate_account", kwargs={"uidb64": uid, "token": token}
+        # )
 
-        # send email
-        mail_subject = "Activate your account"
+        # # send email
+        # mail_subject = "Activate your account"
 
-        message = render_to_string(
-            "airplane_shop/templates/oscar/customer/activation_email.html",
-            {
-                "user": user,
-                "uid": uid,
-                "token": token,
-                "activation_url": activation_url,
-            },
-        )
+        # message = render_to_string(
+        #     "airplane_shop/templates/oscar/customer/activation_email.html",
+        #     {
+        #         "user": user,
+        #         "uid": uid,
+        #         "token": token,
+        #         "activation_url": activation_url,
+        #     },
+        # )
 
-        to_email = form.cleaned_data.get("email")
-        email = EmailMessage(mail_subject, message, to=[to_email])
-        email.send()
+        # to_email = form.cleaned_data.get("email")
+        # email = EmailMessage(mail_subject, message, to=[to_email])
+        # email.send()
 
-        messages.info(
-            self.request,
-            "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
-        )
+        # messages.info(
+        #     self.request,
+        #     "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
+        # )
 
         return redirect(form.cleaned_data["redirect_url"])
 
 
-class ActivateAccountView(generic.View):
-    def get(self, request, uidb64, token):
-        try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            user = User.objects.get(pk=uid)
-            if default_token_generator.check_token(user, token):
-                user.is_active = True
-                user.save()
-                return redirect("customer:login")
-            else:
-                return render(request, "activation_invalid.html")
-        except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
-            return render(request, "activation_invalid.html")
+# class ActivateAccountView(generic.View):
+#     def get(self, request, uidb64, token):
+#         try:
+#             uid = force_str(urlsafe_base64_decode(uidb64))
+#             user = User.objects.get(pk=uid)
+#             if default_token_generator.check_token(user, token):
+#                 user.is_active = True
+#                 user.save()
+#                 return redirect("customer:login")
+#             else:
+#                 return render(request, "activation_invalid.html")
+#         except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
+#             return render(request, "activation_invalid.html")
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
@@ -293,7 +292,7 @@ class AccountAuthView(RegisterUserMixin, generic.TemplateView):
         if redirect_url:
             return redirect_url
 
-        return settings.LOGIN_REDIRECT_URL
+        return reverse("customer:login")
 
 
 class LogoutView(generic.RedirectView):
