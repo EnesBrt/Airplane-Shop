@@ -203,7 +203,7 @@ HAYSTACK_CONNECTIONS = {
 
 OSCAR_DEFAULT_CURRENCY = "EUR"
 OSCAR_SEND_REGISTRATION_EMAIL = False
-OSCAR_ACCOUNTS_REDIRECT_URL = "customer:login"
+OSCAR_ACCOUNTS_REDIRECT_URL = "/accounts/login/"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
