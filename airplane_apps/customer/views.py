@@ -1,6 +1,7 @@
 from django import http
 from django.conf import settings
 from django.urls import reverse
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.views.generic import View
 from django.contrib.auth import login as auth_login
