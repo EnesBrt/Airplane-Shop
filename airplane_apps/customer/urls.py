@@ -1,9 +1,4 @@
 from django.urls import include, path
+from . import views
 
-urlpatterns = [
-    path(
-        "verify-email/<uidb64>/<token>/",
-        VerifyEmailView.as_view(),
-        name="customer:verify-email",
-    ),
-]
+urlpatterns = []

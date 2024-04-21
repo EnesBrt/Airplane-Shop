@@ -1,3 +1,4 @@
+import uuid
 from django import http
 from django.conf import settings
 from django.contrib import messages
@@ -93,8 +94,58 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         return ctx
 
     def form_valid(self, form):
-        self.register_user(form)
+        user = self.register_user(form)
+        # user.is_active = False
+        user.save()
+        """
+        # generate token
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        token = account_activation_token.make_token(user)
+
+        # get current site and activation url
+        activation_url = reverse(
+            "activate_account", kwargs={"uidb64": uid, "token": token}
+        )
+
+        # send email
+        mail_subject = "Activate your account"
+
+        message = render_to_string(
+            "airplane_shop/templates/oscar/customer/activation_email.html",
+            {
+                "user": user,
+                "uid": uid,
+                "token": token,
+                "activation_url": activation_url,
+            },
+        )
+
+        to_email = form.cleaned_data.get("email")
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.send()
+
+        messages.info(self.request, "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.")
+        return redirect('customer:login') 
+        """
         return redirect(form.cleaned_data["redirect_url"])
+
+
+"""class ActivateAccountView(generic.View):
+    def get(self, request, uidb64, token):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            return HttpResponse("Votre compte a été activé avec succès.")
+        else:
+            return HttpResponse("Le lien d'activation est invalide!")
+
+        return redirect("customer:login") """
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
