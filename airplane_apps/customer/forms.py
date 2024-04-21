@@ -154,9 +154,6 @@ class EmailUserCreationForm(forms.ModelForm):
         return password2
 
     def clean_redirect_url(self):
-        url = self.cleaned_data["redirect_url"].strip()
-        if url and url_has_allowed_host_and_scheme(url, self.host):
-            return url
         return settings.OSCAR_ACCOUNTS_REDIRECT_URL
 
     def save(self, commit=True):
