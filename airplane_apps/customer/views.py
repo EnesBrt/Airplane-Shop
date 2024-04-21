@@ -95,9 +95,9 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
 
     def form_valid(self, form):
         user = self.register_user(form)
-        # user.is_active = False
+        user.is_active = False
         user.save()
-        """
+
         # generate token
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = account_activation_token.make_token(user)
@@ -124,13 +124,16 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         email = EmailMessage(mail_subject, message, to=[to_email])
         email.send()
 
-        messages.info(self.request, "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.")
-        return redirect('customer:login') 
-        """
+        messages.info(
+            self.request,
+            "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
+        )
+        return redirect("customer:login")
+
         return redirect(form.cleaned_data["redirect_url"])
 
 
-"""class ActivateAccountView(generic.View):
+class ActivateAccountView(generic.View):
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
@@ -145,7 +148,7 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
         else:
             return HttpResponse("Le lien d'activation est invalide!")
 
-        return redirect("customer:login") """
+        return redirect("customer:login")
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
