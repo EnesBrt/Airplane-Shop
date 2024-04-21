@@ -129,9 +129,8 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
             self.request,
             "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
         )
-        return redirect("customer:register")
 
-        # return redirect(form.cleaned_data["redirect_url"])
+        return redirect(form.cleaned_data["redirect_url"])
 
 
 class ActivateAccountView(generic.View):
