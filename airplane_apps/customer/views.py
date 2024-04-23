@@ -2,8 +2,13 @@ from django import http
 from django.conf import settings
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.shortcuts import resolve_url
 from django.contrib import messages
+from django.core.mail import EmailMessage
 from django.views.generic import View
+from django.shortcuts import render
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
@@ -16,7 +21,6 @@ from django.views import generic
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str
-from django.template.loader import render_to_string
 from django.utils.encoding import force_str, force_bytes
 from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
@@ -98,55 +102,8 @@ class AccountRegistrationView(RegisterUserMixin, generic.FormView):
 
     def form_valid(self, form):
         self.register_user(form)
-        user.save()
 
-        # generate token
-        # uid = urlsafe_base64_encode(force_bytes(user.pk))
-        # token = default_token_generator.make_token(user)
-
-        # # get current site and activation url
-        # activation_url = reverse(
-        #     "activate_account", kwargs={"uidb64": uid, "token": token}
-        # )
-
-        # # send email
-        # mail_subject = "Activate your account"
-
-        # message = render_to_string(
-        #     "airplane_shop/templates/oscar/customer/activation_email.html",
-        #     {
-        #         "user": user,
-        #         "uid": uid,
-        #         "token": token,
-        #         "activation_url": activation_url,
-        #     },
-        # )
-
-        # to_email = form.cleaned_data.get("email")
-        # email = EmailMessage(mail_subject, message, to=[to_email])
-        # email.send()
-
-        # messages.info(
-        #     self.request,
-        #     "Si il vous plaît veuillez confirmer votre adresse e-mail pour compléter l'inscription.",
-        # )
-
-        return reverse("login")
-
-
-# class ActivateAccountView(generic.View):
-#     def get(self, request, uidb64, token):
-#         try:
-#             uid = force_str(urlsafe_base64_decode(uidb64))
-#             user = User.objects.get(pk=uid)
-#             if default_token_generator.check_token(user, token):
-#                 user.is_active = True
-#                 user.save()
-#                 return redirect("customer:login")
-#             else:
-#                 return render(request, "activation_invalid.html")
-#         except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
-#             return render(request, "activation_invalid.html")
+        return redirect(form.cleaned_data["redirect_url"])
 
 
 class AccountAuthView(RegisterUserMixin, generic.TemplateView):
@@ -275,10 +232,41 @@ class AccountAuthView(RegisterUserMixin, generic.TemplateView):
     def validate_registration_form(self):
         form = self.get_registration_form(bind_data=True)
         if form.is_valid():
-            self.register_user(form)
+            user = self.register_user(form)
+            user.is_active = False
+            user.save()
 
             msg = self.get_registration_success_message(form)
             messages.success(self.request, msg)
+
+            # Generate token
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+
+            # Generate the relative activation URL
+            relative_url = reverse(
+                "activate_account", kwargs={"uidb64": uid, "token": token}
+            )
+
+            # Generate the absolute activation URL
+            url_activation = self.request.build_absolute_uri(relative_url)
+
+            # Send email
+            mail_subject = "Activer votre compte"
+            message = render_to_string(
+                "oscar/customer/activation_email.html",
+                {
+                    "user": user,
+                    "uid": uid,
+                    "token": token,
+                    "url_activation": url_activation,
+                },
+            )
+
+            to_email = form.cleaned_data.get("email")
+            email = EmailMultiAlternatives(mail_subject, message, to=[user.email])
+            email.attach_alternative(message, "text/html")
+            email.send()
 
             return redirect(self.get_registration_success_url(form))
 
@@ -287,10 +275,16 @@ class AccountAuthView(RegisterUserMixin, generic.TemplateView):
 
     # pylint: disable=unused-argument
     def get_registration_success_message(self, form):
-        return _("Thanks for registering!")
+        return _(
+            "Thank you for registering. Check your email to complete the registration process."
+        )
 
     def get_registration_success_url(self, form):
-        return reverse("login")
+        redirect_url = form.cleaned_data["redirect_url"]
+        if redirect_url:
+            return redirect_url
+
+        return reverse("custumer:login")
 
 
 class LogoutView(generic.RedirectView):
@@ -305,6 +299,21 @@ class LogoutView(generic.RedirectView):
             response.delete_cookie(cookie)
 
         return response
+
+
+class ActivateAccountView(generic.View):
+    def get(self, request, uidb64, token):
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+            if default_token_generator.check_token(user, token):
+                user.is_active = True
+                user.save()
+                return redirect("customer:login")
+            else:
+                return render(request, "activation_invalid.html")
+        except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
+            return render(request, "activation_invalid.html")
 
 
 # =============

@@ -77,7 +77,8 @@ class RegisterUserMixin(object):
                 u.is_active = False
                 u.save()
 
-        auth_login(self.request, user)
+        # Login the user after registration automatically
+        # auth_login(self.request, user)
 
         return user
 
