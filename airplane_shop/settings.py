@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "airplane_apps",
     "adyen",
+    # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django.contrib.sites",
     "django.contrib.flatpages",
+    # Oscar apps
     "oscar.config.Shop",
     "oscar.apps.analytics.apps.AnalyticsConfig",
     "oscar.apps.checkout.apps.CheckoutConfig",
