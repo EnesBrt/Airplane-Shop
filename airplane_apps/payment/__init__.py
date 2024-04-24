@@ -1,1 +1,1 @@
-default_app_config = 'airplane_apps.payment.apps.PaymentConfig'
+default_app_config = "oscar.apps.payment.apps.PaymentConfig"
