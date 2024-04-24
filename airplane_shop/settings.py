@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",  # Default thumbnail backend, can be replaced
     "django_tables2",
     "adyen",
+    "airplane_shop",
 ]
 
 SITE_ID = 1
