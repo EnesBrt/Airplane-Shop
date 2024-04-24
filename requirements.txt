@@ -29,3 +29,4 @@ Pillow==9.3.0
 django-oscar[sorl-thumbnail]
 django-countries
 pycountry
+django-oscar-adyen
