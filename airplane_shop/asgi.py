@@ -13,10 +13,10 @@ from django.core.asgi import get_asgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "airplane_shop.settings")
 
-from django.core.asgi import get_asgi_application
-
-application = get_asgi_application()
-
 from django.conf import settings
 
 print(settings.USE_I18N)
+
+from django.core.asgi import get_asgi_application
+
+application = get_asgi_application()
