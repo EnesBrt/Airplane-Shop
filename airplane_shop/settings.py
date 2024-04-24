@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "airplane_apps",
+    "django_oscar_adyen",
     # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
