@@ -17,6 +17,4 @@ from django.conf import settings
 
 print(settings.USE_I18N)
 
-from django.core.wsgi import get_wsgi_application
-
 application = get_wsgi_application()
