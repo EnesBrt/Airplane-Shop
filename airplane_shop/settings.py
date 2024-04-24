@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "oscar.apps.communication.apps.CommunicationConfig",
     "oscar.apps.partner.apps.PartnerConfig",
     "oscar.apps.basket.apps.BasketConfig",
-    "oscar.apps.payment.apps.PaymentConfig",
+    "airplane_apps.payment.apps.PaymentConfig",
     "oscar.apps.offer.apps.OfferConfig",
     "oscar.apps.order.apps.OrderConfig",
     "airplane_apps.customer.apps.CustomerConfig",
