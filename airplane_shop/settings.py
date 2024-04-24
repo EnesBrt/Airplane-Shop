@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "airplane_apps",
     "adyen",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -80,7 +81,6 @@ INSTALLED_APPS = [
     "treebeard",
     "sorl.thumbnail",  # Default thumbnail backend, can be replaced
     "django_tables2",
-    "airplane_shop",
 ]
 
 SITE_ID = 1
