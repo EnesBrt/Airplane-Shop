@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "treebeard",
     "sorl.thumbnail",  # Default thumbnail backend, can be replaced
     "django_tables2",
+    "paypal",
 ]
 
 SITE_ID = 1
