@@ -2,6 +2,11 @@
 # Exit on error
 set -o errexit
 
+# Install django-oscar-paypal using setup.py
+cd django-oscar-paypal
+pip install .
+cd ..
+
 # Modify this line as needed for your package manager (pip, poetry, etc.)
 pip install -r requirements.txt
 
