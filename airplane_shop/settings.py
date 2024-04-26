@@ -214,3 +214,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "enesbarut99@gmail.com"
 EMAIL_HOST_PASSWORD = "ybir xmmc rjtu atnf"
+
+PAYPAL_API_USERNAME = "sb-nylat29879856_api1.business.example.com"
+PAYPAL_API_PASSWORD = "97QL9PCAXYTWY2GT"
+PAYPAL_API_SIGNATURE = "Agx62Owi1h4MTyXFxzebQS9V9a1MAUtzsufEK5yt5iFneB9eiSxoXuHB"
