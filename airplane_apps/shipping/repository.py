@@ -1,5 +1,6 @@
 from decimal import Decimal as D
-
+from oscar.apps.shipping import repository
+from . import methods
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
@@ -30,7 +31,7 @@ class Repository(object):
     # We default to just free shipping. Customise this class and override this
     # property to add your own shipping methods. This should be a list of
     # instantiated shipping methods.
-    methods = (Free(),)
+    methods = (Free(), methods.Standard(), methods.Express())
 
     # API
 
