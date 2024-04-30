@@ -15,9 +15,3 @@
         {% endblocktrans %}
     {% endif %}
 {% endif %}
-
-{% if include_buttons %}
-    <br>
-    <a href="{% url 'basket:summary' %}" class="btn btn-info">{% trans "View basket" %}</a>
-    <a href="{% url 'checkout:index' %}" class="btn btn-info">{% trans "Checkout directly" %}</a>
-{% endif %}
