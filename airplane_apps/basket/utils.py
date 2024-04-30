@@ -19,7 +19,7 @@ class BasketMessageGenerator(object):
     offer_lost_template_name = "oscar/basket/messages/offer_lost.html"
     offer_gained_template_name = "oscar/basket/messages/offer_gained.html"
 
-    def get_new_total_messages(self, basket, include_buttons=True):
+    def get_new_total_messages(self, basket, include_buttons=False):
         new_total_messages = []
         # We use the 'include_buttons' parameter to determine whether to show the
         # 'Checkout now' buttons.  We don't want to show these on the basket page.
