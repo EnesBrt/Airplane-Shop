@@ -74,7 +74,7 @@ class Repository(object):
         Return a list of all applicable shipping method instances for a given
         basket, address etc. This method is intended to be overridden.
         """
-        methods = list(self.methods)
+        methods = free()
         return self.methods
 
     def apply_shipping_offers(self, basket, methods):
