@@ -31,12 +31,7 @@ class Repository(object):
     # We default to just free shipping. Customise this class and override this
     # property to add your own shipping methods. This should be a list of
     # instantiated shipping methods.
-    methods = (
-        Free(),
-        NoShippingRequired(),
-        TaxExclusiveOfferDiscount(),
-        TaxInclusiveOfferDiscount(),
-    )
+    methods = (Free(),)
 
     # API
 
@@ -79,6 +74,7 @@ class Repository(object):
         Return a list of all applicable shipping method instances for a given
         basket, address etc. This method is intended to be overridden.
         """
+        methods = list(self.methods)
         return self.methods
 
     def apply_shipping_offers(self, basket, methods):
