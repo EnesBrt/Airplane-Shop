@@ -201,7 +201,7 @@ class BasketView(ModelFormSetView):
             offers_after = self.request.basket.applied_offers()
 
             for level, msg in BasketMessageGenerator().get_messages(
-                self.request.basket, offers_before, offers_after, include_buttons=False
+                self.request.basket, offers_before, offers_after, include_buttons=True
             ):
                 flash_messages.add_message(level, msg)
 
