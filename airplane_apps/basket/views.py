@@ -368,7 +368,7 @@ class BasketAddView(FormView):
         )
 
         # Check for additional offer messages
-        # BasketMessageGenerator().apply_messages(self.request, offers_before)
+        BasketMessageGenerator().apply_messages(self.request, offers_before)
 
         # Send signal for basket addition
         self.add_signal.send(
