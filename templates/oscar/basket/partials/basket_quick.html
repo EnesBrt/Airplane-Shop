@@ -37,6 +37,7 @@
                 {% endif %}
             </p>
             <a href="{% url 'basket:summary' %}" class="btn btn-info btn-sm">{% trans "View basket" %}</a>
+            <a href="{% url 'paypal-redirect' %}" class="btn btn-primary btn-sm float-right"><i class="fas fa-shopping-cart"></i> {% trans "Checkout" %}</a>
         </li>
     {% else %}
         <li><p>{% trans "Your basket is empty." %}</p></li>
