@@ -55,7 +55,7 @@ class BasketMessageGenerator(object):
         )
         return offer_messages
 
-    def get_messages(self, basket, offers_before, offers_after, include_buttons=False):
+    def get_messages(self, basket, offers_before, offers_after, include_buttons=True):
         message_list = []
         message_list.extend(self.get_offer_messages(offers_before, offers_after))
         message_list.extend(self.get_new_total_messages(basket, include_buttons))
