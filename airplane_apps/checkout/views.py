@@ -43,7 +43,7 @@ class IndexView(CheckoutSessionMixin, generic.FormView):
 
     template_name = "oscar/checkout/gateway.html"
     form_class = GatewayForm
-    success_url = reverse_lazy("checkout:shipping-address")
+    success_url = reverse_lazy("checkout:preview")
     pre_conditions = ["check_basket_is_not_empty", "check_basket_is_valid"]
 
     def get(self, request, *args, **kwargs):
@@ -86,7 +86,7 @@ class IndexView(CheckoutSessionMixin, generic.FormView):
                 )
                 self.success_url = "%s?next=%s&email=%s" % (
                     reverse("customer:register"),
-                    reverse("checkout:shipping-address"),
+                    reverse("checkout:preview"),
                     quote(email),
                 )
         else:
