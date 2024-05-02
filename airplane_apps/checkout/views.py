@@ -53,7 +53,7 @@ class IndexView(CheckoutSessionMixin, generic.FormView):
             # We raise a signal to indicate that the user has entered the
             # checkout process so analytics tools can track this event.
             signals.start_checkout.send_robust(sender=self, request=request)
-            return redirect(reverse_lazy("checkout:preview"))
+            return self.get_success_response()
         return super().get(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -97,10 +97,10 @@ class IndexView(CheckoutSessionMixin, generic.FormView):
             # checkout process.
             signals.start_checkout.send_robust(sender=self, request=self.request)
 
-        return redirect(reverse_lazy("checkout:preview"))
+        return redirect(self.get_success_url())
 
     def get_success_response(self):
-        return redirect(reverse_lazy("checkout:preview"))
+        return redirect(self.get_success_url())
 
 
 # ================
