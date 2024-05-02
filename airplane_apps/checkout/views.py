@@ -97,10 +97,10 @@ class IndexView(CheckoutSessionMixin, generic.FormView):
             # checkout process.
             signals.start_checkout.send_robust(sender=self, request=self.request)
 
-        return redirect(self.get_success_url())
+        return redirect(reverse_lazy("checkout:preview"))
 
     def get_success_response(self):
-        return redirect(self.get_success_url())
+        return redirect(reverse_lazy("checkout:preview"))
 
 
 # ================
