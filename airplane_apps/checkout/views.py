@@ -53,7 +53,7 @@ class IndexView(CheckoutSessionMixin, generic.FormView):
             # We raise a signal to indicate that the user has entered the
             # checkout process so analytics tools can track this event.
             signals.start_checkout.send_robust(sender=self, request=request)
-            return self.get_success_response()
+            return self.get_success_response("checkout:preview")
         return super().get(request, *args, **kwargs)
 
     def get_form_kwargs(self):
