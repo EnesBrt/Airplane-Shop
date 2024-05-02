@@ -82,7 +82,7 @@
                 {% endif %}
             </div>
         {% endblock shipping_address %}
-        {% endcomment %}
+        
 
         {# You will almost certainly want to override this block to provide a payment summary #}
         {% block payment_method %}
@@ -102,6 +102,7 @@
             </div>
         {% endblock payment_method %}
     </div>
+    {% endcomment %}
 
     {% block order_contents %}
         <div class="sub-header">
