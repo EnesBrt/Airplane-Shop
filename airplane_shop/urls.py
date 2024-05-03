@@ -17,6 +17,7 @@ Including another URLconf
 from django.apps import apps
 from django.urls import include, path
 from django.contrib import admin
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
