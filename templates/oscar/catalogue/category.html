@@ -1,0 +1,55 @@
+{% extends "oscar/catalogue/browse.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {{ category.get_meta_title }} | {{ block.super }}
+{% endblock %}
+
+{% block description %}
+    {{ category.get_meta_description }}
+{% endblock %}
+
+{% block header%}
+    <div class="page-header">
+        {% if user.is_staff %}
+            <a class="float-right d-none d-md-block" href="{% url 'dashboard:catalogue-category-update' pk=category.id %}">
+              <small><i class="fas fa-pencil-alt"></i> {% trans "Edit this category" %}</small></a>
+        {% endif %}
+        <h1>{% block headertext %}{{ category.name }}{% endblock %}</h1>
+    </div>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="nav nav-pills justify-content-center mb-4">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{{ homepage_url }}">{% trans "All products" %}</a>
+      </li>
+    {% for category in category.get_categories %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ category.get_absolute_url }}">
+            {% if tree_category.pk == category.pk %}
+                <strong>{{ category.name }}</strong>
+            {% else %}
+            {{ category.name }}
+            {% endif %}
+        </a>
+      </li>
+{% endfor %}
+        <li class="nav-item" aria-current="page">
+            <a class="nav-link active" aria-current="page" aria-disabled="true">{{ category.name }}</a>
+        </li>
+    </ul>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    {% if category.description %}
+        <div class="row">
+            <div class="col-sm-9"><p>{{ category.description|safe }}</p></div>
+            {% if category.image %}
+                <div class="col-sm-3"><img src="{{ category.image.url }}" alt="{{ category.name }}" class="img-fluid" /></div>
+            {% endif %}
+        </div>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}

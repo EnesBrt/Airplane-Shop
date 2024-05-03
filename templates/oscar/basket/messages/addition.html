@@ -1,0 +1,16 @@
+{% extends 'oscar/basket/messages/addition.html' %}
+{% load i18n %}
+{% load static %}
+
+
+
+{% if quantity == 1 %}
+    {% blocktrans with title=product.get_title %}
+    <strong>{{ title }}</strong> has been added to your basket.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans with title=product.get_title quantity=quantity %}
+    <strong>{{ quantity }}</strong> copies of <strong>{{ title }}</strong>
+    have been added to your basket.
+    {% endblocktrans %}
+{% endif %}
