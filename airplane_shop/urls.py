@@ -26,4 +26,4 @@ urlpatterns = [
     path("", include(apps.get_app_config("oscar").urls[0])),
     path("customer/", include("airplane_apps.customer.urls")),
     path(r"^checkout/paypal/", include("paypal.express.urls")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
