@@ -27,7 +27,7 @@
                 </form>
                 {% endif %}
             {% endblock %}
-            {% include "templates/oscar/partials/nav_primary.html" %}
+            {% include "nav_primary.html" %}
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 {% if user.is_authenticated %}
                 {% block nav_account_navbar_authenticated %}
