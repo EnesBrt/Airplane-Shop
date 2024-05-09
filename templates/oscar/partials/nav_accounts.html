@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load category_tags %}
-
+layout.html
 <nav id="top_page" class="navbar navbar-expand-lg navbar-light bg-light accounts">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".account-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,6 +29,23 @@
             {% endblock %}
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 {% if user.is_authenticated %}
+                {% block navbar_basket %}
+                    <a class="btn btn-secondary float-right btn-cart ml-auto d-inline-block d-md-none" href="{% url 'basket:summary' %}">
+                        <i class="fas fa-shopping-cart"></i>
+                        {% trans "Basket" %}
+                        {% if not request.basket.is_empty %}
+                            {% if request.basket.is_tax_known %}
+                                {% blocktrans with total=request.basket.total_incl_tax|currency:request.basket.currency %}
+                                    Total: {{ total }}
+                                {% endblocktrans %}
+                            {% else %}
+                                {% blocktrans with total=request.basket.total_excl_tax|currency:request.basket.currency %}
+                                    Total: {{ total }}
+                                {% endblocktrans %}
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                {% endblock %}
                 {% block nav_extra %}
                     {% include "oscar/partials/search.html" %}
                 {% endblock %}
