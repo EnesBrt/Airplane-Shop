@@ -131,7 +131,7 @@ WSGI_APPLICATION = "airplane_shop.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgresql://enesbarut:barut_admin@localhost:5432/airplane_shop",
+        default="postgresql://adil:adil_admin@localhost:5432/airplane_shop_db",
         conn_max_age=600,
     )
 }
@@ -178,6 +178,9 @@ USE_TZ = True
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 # This production code might break development mode, so we check whether we're in DEBUG mode
 if (
     not DEBUG
