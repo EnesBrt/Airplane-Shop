@@ -131,7 +131,7 @@ WSGI_APPLICATION = "airplane_shop.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgresql://adil:adil_admin@localhost:5432/airplane_shop_db",
+        default="postgresql://enesbarut:barut_admin@localhost:5432/airplane_shop",
         conn_max_age=600,
     )
 }
