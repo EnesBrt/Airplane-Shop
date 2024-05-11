@@ -178,9 +178,7 @@ USE_TZ = True
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # This production code might break development mode, so we check whether we're in DEBUG mode
 if (
     not DEBUG
@@ -225,3 +223,5 @@ PAYPAL_API_SIGNATURE = "Agx62Owi1h4MTyXFxzebQS9V9a1MAUtzsufEK5yt5iFneB9eiSxoXuHB
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, "public/media")
+
+OSCAR_ALLOW_ANON_CHECKOUT = True
