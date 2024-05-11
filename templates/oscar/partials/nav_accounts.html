@@ -29,6 +29,7 @@
                 {% endif %}
             {% endblock %}
             <ul class="navbar-nav ml-md-auto d-md-flex">
+                {% include "oscar/partials/brand.html" %}
                 {% block nav_extra %}
                     {% include "oscar/partials/search.html" %}
                 {% endblock %}
@@ -52,7 +53,7 @@
                         {% endblock %}
                     </div>
                 </li>
-                
+
                 {% if user.is_authenticated %}
                 {% block nav_account_navbar_authenticated %}
                     <li class="nav-item dropdown mr-2">
