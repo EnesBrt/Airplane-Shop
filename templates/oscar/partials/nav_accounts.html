@@ -30,11 +30,13 @@
                 {% endif %}
             {% endblock %}
             <ul class="navbar-nav ml-md-auto d-md-flex">
-                <a href="{% url 'catalogue:index' %}">
+                <a href="{% url 'catalogue:index' %}" style="margin-left: 20px;">
                     <img src="/aviation.jpg" alt="Logo" style="width: 50px; border-radius: 20%;">
                 </a>
                 {% block nav_extra %}
-                    {% include "oscar/partials/search.html" %}
+                    <div style="width: 50%; margin: 0 auto; text-align: center;">
+                        {% include "oscar/partials/search.html" %}
+                    </div>
                 {% endblock %}
                 
                 <li class="nav-item dropdown">
