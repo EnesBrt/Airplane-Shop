@@ -5,7 +5,43 @@ Keep the same header and footer as the standard layout template but override the
 main content area to split it into a sidebar and a content block
 {% endcomment %}
 {% block content_wrapper %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<style>
+    .c-item {
+    height: 480px;
+    }
+
+    .c-img {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1);
+    }
+</style>
+
 <div class="{% block content_wrapper_classes %}container page{% endblock %}">
+<!--    <div style="background-color: red;">-->
+<!--        <img src="/airbus_catalogue.jpg" style="height: 100%; width: 100%;  box-shadow: inset 0 0 100px #000;">-->
+<!--    </div>-->
+<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active c-item">
+      <img src="/airbus_catalogue.jpg" class="d-block w-100 c-img" alt="Airbus">
+    </div>
+    <div class="carousel-item c-item">
+      <img src="/boeing_catalogue.jpg" class="d-block w-100 c-img" alt="Boeing">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"></span>
+  </button>
+</div>
+
     <div class="page_inner">
         {% block breadcrumbs %}{% endblock %}
         <div class="row">
@@ -29,3 +65,5 @@ main content area to split it into a sidebar and a content block
     </div><!-- /page_inner -->
 </div><!-- /container -->
 {% endblock %}
+
+
