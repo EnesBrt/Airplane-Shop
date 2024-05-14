@@ -35,10 +35,12 @@
             </a>
 
             {% block nav_extra %}
-                <div class="d-flex justify-content-center flex-grow-1">
-                    {% include "oscar/partials/search.html" %}
+                <div class="d-flex justify-content-center flex-grow-1 align-items-center" style="height: 100%;">
+                    <div style="margin: auto;">
+                        {% include "oscar/partials/search.html" %}
+                    </div>
                 </div>
-            {% endblock %}
+            % endblock %}
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 
