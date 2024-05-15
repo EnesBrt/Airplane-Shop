@@ -12,12 +12,10 @@
     {# Site logo/title, mini-basket, browse dropdown and searchbox #}
     <header class="header container">
         <div class="page_inner">
-            <div class="row justify-content-between">
+            <div class="row justify-content-between" style="margin-left: auto;">
                 <!-- {% include "oscar/partials/brand.html" %} -->
                 {# Mini-basket wrapped in a block so some templates can now display it #}
-                <div class="d-flex justify-content-between">
-                    {% block mini_basket %}{% include "oscar/partials/mini_basket.html" %}{% endblock %}
-                </div>
+                {% block mini_basket %}{% include "oscar/partials/mini_basket.html" %}{% endblock %}
             </div>
         </div>
         <!-- {% block navigation %}
