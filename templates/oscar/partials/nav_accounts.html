@@ -34,15 +34,12 @@
                 <img src="/aviation.jpg" alt="Logo" style="width: 50px; border-radius: 20%;">
             </a>
 
-            {% block nav_extra %}
-                <div class="d-flex justify-content-center flex-grow-1 align-items-center">
-                    <div style="margin-left: 50px;">
+            <ul class="navbar-nav ml-md-auto d-md-flex">
+                {% block nav_extra %}
+                    <div style="margin-right: 20px;">
                         {% include "oscar/partials/search.html" %}
                     </div>
-                </div>
-            {% endblock %}
-
-            <ul class="navbar-nav ml-md-auto d-md-flex">
+                {% endblock %}
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
