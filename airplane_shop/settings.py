@@ -220,6 +220,7 @@ PAYPAL_API_USERNAME = "sb-nylat29879856_api1.business.example.com"
 PAYPAL_API_PASSWORD = "97QL9PCAXYTWY2GT"
 PAYPAL_API_SIGNATURE = "Agx62Owi1h4MTyXFxzebQS9V9a1MAUtzsufEK5yt5iFneB9eiSxoXuHB"
 
+OSCAR_IMAGE_FOLDER = ""
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, "public/media")
