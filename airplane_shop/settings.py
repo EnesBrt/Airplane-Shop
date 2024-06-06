@@ -223,6 +223,6 @@ PAYPAL_API_SIGNATURE = "Agx62Owi1h4MTyXFxzebQS9V9a1MAUtzsufEK5yt5iFneB9eiSxoXuHB
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, "public/media")
-MEDIA_URL = "/public/media/"
+MEDIA_URL = "/media/"
 
 OSCAR_ALLOW_ANON_CHECKOUT = True
