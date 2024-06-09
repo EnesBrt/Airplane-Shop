@@ -226,4 +226,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "public/media")
 OSCAR_IMAGE_FOLDER = "public/media"
 
 OSCAR_ALLOW_ANON_CHECKOUT = True
-""
