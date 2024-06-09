@@ -177,8 +177,13 @@ USE_TZ = True
 # This setting informs Django of the URI path from which your static files will be served to users
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, "public/media")
+MEDIA_URL = "/media/"
+
 # This production code might break development mode, so we check whether we're in DEBUG mode
 if (
     not DEBUG
@@ -219,10 +224,5 @@ EMAIL_HOST_PASSWORD = "ybir xmmc rjtu atnf"
 PAYPAL_API_USERNAME = "sb-nylat29879856_api1.business.example.com"
 PAYPAL_API_PASSWORD = "97QL9PCAXYTWY2GT"
 PAYPAL_API_SIGNATURE = "Agx62Owi1h4MTyXFxzebQS9V9a1MAUtzsufEK5yt5iFneB9eiSxoXuHB"
-
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_ROOT = os.path.join(BASE_DIR, "public/media")
-OSCAR_IMAGE_FOLDER = "public/media"
 
 OSCAR_ALLOW_ANON_CHECKOUT = True
