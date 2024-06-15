@@ -191,7 +191,6 @@ if (
     # and renames the files with unique names for each version to support long-term caching
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-WHITENOISE_ROOT = MEDIA_ROOT
 THUMBNAIL_PREFIX = "media/"
 
 # Default primary key field type
