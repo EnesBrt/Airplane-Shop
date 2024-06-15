@@ -192,7 +192,7 @@ if (
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 WHITENOISE_ROOT = MEDIA_ROOT
-THUMBNAIL_PREFIX = "/media/"
+THUMBNAIL_PREFIX = "media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
