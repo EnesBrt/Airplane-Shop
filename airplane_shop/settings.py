@@ -85,8 +85,8 @@ INSTALLED_APPS = [
     "sorl.thumbnail",  # Default thumbnail backend, can be replaced
     "django_tables2",
     "paypal",
-    "cloudinary_storage",
     "cloudinary",
+    "cloudinary_storage",
 ]
 
 SITE_ID = 1
