@@ -14,6 +14,10 @@ from pathlib import Path
 from oscar.defaults import *
 import dj_database_url
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import cloudinary_storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,6 +85,8 @@ INSTALLED_APPS = [
     "sorl.thumbnail",  # Default thumbnail backend, can be replaced
     "django_tables2",
     "paypal",
+    "cloudinary_storage",
+    "cloudinary",
 ]
 
 SITE_ID = 1
@@ -191,8 +197,6 @@ if (
     # and renames the files with unique names for each version to support long-term caching
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-THUMBNAIL_PREFIX = "media/"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -226,3 +230,12 @@ PAYPAL_API_PASSWORD = "97QL9PCAXYTWY2GT"
 PAYPAL_API_SIGNATURE = "Agx62Owi1h4MTyXFxzebQS9V9a1MAUtzsufEK5yt5iFneB9eiSxoXuHB"
 
 OSCAR_ALLOW_ANON_CHECKOUT = True
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": "dxv11asa8",
+    "API_KEY": "493921683715615",
+    "API_SECRET": "YsR6lRz1kjbmS6Iw5awGt_apns0",
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+STATICFILES_STORAGE = "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
